@@ -194,6 +194,8 @@ module.exports = {
 	listGameTypes: listGameTypes,
 	listPlayers: listPlayers,
 	insertPlayers: insertPlayers,
+	listCharacters: listCharacters,
+	insertCharacters: insertCharacters,
 	match: match,
 	isNameInList: isNameInList,
 	findSubstringNames: findSubstringNames,
