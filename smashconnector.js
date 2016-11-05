@@ -4,6 +4,7 @@ var levenshtein = require('fast-levenshtein');
 //Mongo connection section
 
 const playerCollection = "players";
+const characterCollection = "characters";
 const stageCollection = "stages";
 const gameTypeCollection = "gameTypes";
 const gameCollection = "games";
@@ -38,6 +39,14 @@ function insertPlayers(url, players, callback) {
 
 function listPlayers(url, query, callback) {
 	mongoList(url, playerCollection, query, callback);
+}
+
+function insertCharacters(url, characters, callback) {
+	mongoInsert(url, characterCollection, characters, callback);
+}
+
+function listCharacters(url, query, callback) {
+	mongoList(url, characterCollection, query, callback);
 }
 
 function mongoList(url, collectionName, query, callback) {
