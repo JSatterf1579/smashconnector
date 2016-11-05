@@ -1,0 +1,33 @@
+{
+  "name": "smashconnector",
+  "version": "1.0.0",
+  "description": "connector library used to access dublin smash data",
+  "main": "smashconnector.js",
+  "scripts": {
+    "test": "mocha spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drew-myers/dub-smash-archive-connector.git"
+  },
+  "keywords": [
+    "dublin",
+    "smash"
+  ],
+  "author": "drewmyers1620@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drew-myers/dub-smash-archive-connector/issues"
+  },
+  "homepage": "https://github.com/drew-myers/dub-smash-archive-connector#readme",
+  "dependencies": {
+    "fast-levenshtein": "^2.0.5",
+    "install": "^0.8.2",
+    "mongodb": "^2.2.11",
+    "npm": "^3.10.9"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  }
+}
