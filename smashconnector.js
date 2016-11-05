@@ -72,7 +72,7 @@ function match(name, list) {
 	}
 
 	var result = {};
-	if(isValidName(name, list)) { //Given name is an exact match
+	if(isNameInList(name, list)) { //Given name is an exact match
 		result.match = true,
 		result.suggestions = [];
 	} else { //Match for name not found, return suggestions
@@ -83,7 +83,7 @@ function match(name, list) {
 	return result;
 }
 
-function isValidName(name, list) {
+function isNameInList(name, list) {
 	//Null check
 	if(!(name && list)) { return false; }
 
@@ -186,7 +186,7 @@ module.exports = {
 	listPlayers: listPlayers,
 	insertPlayers: insertPlayers,
 	match: match,
-	isValidName: isValidName,
+	isNameInList: isNameInList,
 	findSubstringNames: findSubstringNames,
 	findSimilarNames: findSimilarNames,
 	formatParticipantData: formatParticipantData,

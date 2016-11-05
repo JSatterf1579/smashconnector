@@ -10,7 +10,7 @@ describe('data validation', () => {
 				{ "name": "bob" }
 			]
 
-			var isValid = smashconnector.isValidName("jim", list);
+			var isValid = smashconnector.isNameInList("jim", list);
 			chai.expect(isValid).to.equal(true, 'method did not return true for name in list');
 		});
 
@@ -20,7 +20,7 @@ describe('data validation', () => {
 				{ "name": "bob" }
 			]
 
-			var isValid = smashconnector.isValidName("BOB", list);
+			var isValid = smashconnector.isNameInList("BOB", list);
 			chai.expect(isValid).to.equal(true, 'method did not return true for ALL CAPS name in list');
 		});
 
@@ -30,19 +30,19 @@ describe('data validation', () => {
 				{ "name": "bob" }
 			]
 
-			var isValid = smashconnector.isValidName("tim", list);
+			var isValid = smashconnector.isNameInList("tim", list);
 			chai.expect(isValid).to.equal(false, 'method did not return false for name not in list');
 		});
 
 		it('is robust to null input', () => {
-			var isValid = smashconnector.isValidName("tim", null);
+			var isValid = smashconnector.isNameInList("tim", null);
 			chai.expect(isValid).to.equal(false, 'method did not return false for null list');
 
 			var list = [
 				{ "name": "jim" },
 				{ "name": "bob" }
 			]
-			var isValid = smashconnector.isValidName(null, list);
+			var isValid = smashconnector.isNameInList(null, list);
 			chai.expect(isValid).to.equal(false, 'method did not return false for null name');
 		})
 	});
