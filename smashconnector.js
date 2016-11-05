@@ -13,7 +13,7 @@ function insertGames(url, games, callback) {
 }
 
 function listGames(url, query, callback) {
-	mongolist(url, gameCollection, query, callback);
+	mongoList(url, gameCollection, query, callback);
 }
 
 function insertStages(url, stages, callback) {
