@@ -171,7 +171,12 @@ function insertGameTypes(url, gameTypes, callback(err, result)) {
 ## Query
 <a name="query"></a>
 
-Querying data from the archive is easy and is done using <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">mongo query documents</a>. 
+Querying data from the archive is easy and is done using <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">mongo query documents</a>.
+
+For example, here's a query document that finds all the games that **I** won, of which there should be many:
+```json
+{ "participants": { "$elemMatch": { "name": "drew", "win": true } } }
+```
 
 Just like with insert, there are functions to query from each of the collections mentioned above. Each of these calls back with a list of json documents. As with insert, the error callback object will be populate if there is an error during the operation.
 
