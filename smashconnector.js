@@ -54,7 +54,7 @@ function mongoList(url, collectionName, query, callback) {
 		var collection = db.collection(collectionName);
 		collection.find(query).toArray((err, docs) => {
 			db.close();
-			callback(docs);
+			callback(err, docs);
 		});
 	});
 }
@@ -64,7 +64,7 @@ function mongoInsert(url, collectionName, docs, callback) {
 		var collection = db.collection(collectionName);
 		collection.insert(docs, (err, result) => {
 			db.close();
-			callback(result);
+			callback(err, result);
 		});
 	});
 }
@@ -159,7 +159,7 @@ function formatStageData(name, chooser)
 	}
 }
 
-function formatGameData(participantList, stage, gameType)
+function formatGameData(participantList, stage, gameType, tournamentGame)
 {
 	if(isInputEmpty([participantList, stage, gameType])) {
 		return new Error("empty input provided");
@@ -172,7 +172,8 @@ function formatGameData(participantList, stage, gameType)
 	return {
 		"participants": participantList,
 		"stage": stage,
-		"gameType": gameType
+		"gameType": gameType,
+		"tournamentGame": tournamentGame
 	}
 }
 

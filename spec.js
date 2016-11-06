@@ -268,7 +268,7 @@ function generateGameData() {
 		"name": "dreamland",
 		"chooser": "random"
 	}
-	var game = smashconnector.formatGameData([participant1, participant2], stage, "singles");
+	var game = smashconnector.formatGameData([participant1, participant2], stage, "singles", true);
 
 	return game;
 }
@@ -295,6 +295,7 @@ function getGameExpectedData() {
 			"name": "dreamland",
 			"chooser": "random"
 		},
-		"gameType": "singles"
+		"gameType": "singles",
+		"tournamentGame": true
 	}
 }
