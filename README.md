@@ -44,7 +44,7 @@ smashconnector.listPlayers("mongodb://example.mongo.url:27017/example", {} (err,
 	}
 
 	// Now that we have the name, let's format the participant data
-	var participantData = formatParticipantData(player1name, "captain_falcon", 4, 2, true, true)
+	var participantData = formatParticipantData(player1name, "captain_falcon", 4, 2, true);
 
 	// .. more formatting to create game record
 	// var games = a list of games in this match
