@@ -49,7 +49,7 @@ smashconnector.listPlayers("mongodb://example.mongo.url:27017/example", {} (err,
 	// .. more formatting to create game record
 	// var games = a list of games in this match
 
-	smashconnector.insertGames("mongodb://example.mongo.url:27017", games, (result) => {
+	smashconnector.insertGames("mongodb://example.mongo.url:27017", games, (err, result) => {
 		// We've inserted validated and formatted game data!
 	});
 });
