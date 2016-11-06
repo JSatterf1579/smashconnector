@@ -1,6 +1,6 @@
 # smashconnector
 
-Use this to query, insert, validate and format data to and from a mongo smash game archive.
+Use this to programatically query, insert, validate and format data to and from a mongo smash game archive.
 
 ## Installation
 <a name="installation"></a>
