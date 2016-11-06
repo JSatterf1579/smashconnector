@@ -1,6 +1,6 @@
 {
   "name": "smashconnector",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "connector library used to access dublin smash data",
   "main": "smashconnector.js",
   "scripts": {
