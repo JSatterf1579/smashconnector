@@ -30,7 +30,7 @@ Here's an example:
 var player1name = "carl"
 
 // Get a list of all players in our data set
-smashconnector.listPlayers("mongodb://example.mongo.url", {} (players) => {
+smashconnector.listPlayers("mongodb://example.mongo.url:27017/example", {} (err, players) => {
 	
 	// Let's validate that player name is one of the one's in our list
 	var playerMatch = smashconnector.match(player1name, players);
@@ -44,7 +44,7 @@ smashconnector.listPlayers("mongodb://example.mongo.url", {} (players) => {
 	}
 
 	// Now that we have the name, let's format the participant data
-	var participantData = formatParticipantData(player1name, "captain_falcon", 4, 2, true)
+	var participantData = formatParticipantData(player1name, "captain_falcon", 4, 2, true, true)
 
 	// .. more formatting to create game record
 	// var games = a list of games in this match
@@ -100,7 +100,8 @@ Most are just simple name entries for now, but game data is interesting and part
 			"name": "dreamland",
 			"chooser": "random"
 		},
-		"gameType": "singles"
+		"gameType": "singles",
+		"tournamentGame": true
 	}
 ```
 As mentioned above, only game data is interesting. The *smashconnector* includes a few methods that raw string inputs and return the correctly formatted json used to represent game data.
@@ -108,7 +109,7 @@ As mentioned above, only game data is interesting. The *smashconnector* includes
 ```javascript
 function formatParticipantData(name, character, starting_stocks, remaining_stocks, win) {
 function formatStageData(name, chooser) {
-function formatGameData(participantList, stage, gameType) {
+function formatGameData(participantList, stage, gameType, tournamentGame) {
 ```
 And here is an example composing all of those functions together to create a game json entry
 ```javascript
@@ -117,7 +118,7 @@ And here is an example composing all of those functions together to create a gam
 
 	var stage = smashconnector.formatStageData("dreamland", "random");
 
-	var game = smashconnector.formatGameData([participant1, participant2], stage, "singles");
+	var game = smashconnector.formatGameData([participant1, participant2], stage, "singles", true);
 ```
 
 ## Validation
@@ -151,20 +152,20 @@ function findSimilarNames(name, list) { -> [Strings]
 
 Now that we know how to format and validate input data, we can insert it into the mongo archive.
 
-There are functions to insert into each of the collections mentioned above. Each of these calls back with a mongo result object indicating if the insert was successful.
+There are functions to insert into each of the collections mentioned above. Each of these calls back with mongo error and result objects. One will be be populate and the other null depending on whether the operation was successfull or not.
 
 ```javascript
-function insertGames(url, games, callback(result)) {
+function insertGames(url, games, callback(err, result)) {
 
-function insertPlayers(url, players, callback(result)) {
+function insertPlayers(url, players, callback(err, result)) {
 
-function insertPlayers(url, players, callback(result)) {
+function insertPlayers(url, players, callback(err, result)) {
 
-function insertStages(url, stages, callback(result)) {
+function insertStages(url, stages, callback(err, result)) {
 
-function insertCharacters(url, characters, callback(result)) {
+function insertCharacters(url, characters, callback(err, result)) {
 
-function insertGameTypes(url, gameTypes, callback(result)) {
+function insertGameTypes(url, gameTypes, callback(err, result)) {
 ```
 
 ## Query
@@ -172,18 +173,18 @@ function insertGameTypes(url, gameTypes, callback(result)) {
 
 Querying data from the archive is easy and is done using <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">mongo query documents</a>. 
 
-Just like with insert, there are functions to query from each of the collections mentioned above. Each of these calls back with a list of json documents.
+Just like with insert, there are functions to query from each of the collections mentioned above. Each of these calls back with a list of json documents. As with insert, the error callback object will be populate if there is an error during the operation.
 
 ```javascript
-function listGames(url, query, callback(docs)) {
+function listGames(url, query, callback(err, docs)) {
 
-function listPlayers(url, query, callback(docs)) {
+function listPlayers(url, query, callback(err, docs)) {
 
-function listPlayers(url, query, callback(docs)) {
+function listPlayers(url, query, callback(err, docs)) {
 
-function listStages(url, query, callback(docs)) {
+function listStages(url, query, callback(err, docs)) {
 
-function listCharacters(url, query, callback(docs)) {
+function listCharacters(url, query, callback(err, docs)) {
 
-function listGameTypes(url, query, callback(docs)) {
+function listGameTypes(url, query, callback(err, docs)) {
 ```
