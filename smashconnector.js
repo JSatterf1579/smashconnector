@@ -179,7 +179,7 @@ function formatGameData(participantList, stage, gameType, tournamentGame)
 
 function isInputEmpty(inputList) {
 	for(var i in inputList) {
-		if(!(inputList[i] && inputList[i] !== "")) {
+		if(!(inputList[i] != null && inputList[i] !== "")) {
 			return true;
 		}
 	}

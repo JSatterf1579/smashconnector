@@ -184,10 +184,10 @@ describe('data formatting', () => {
 				"name": "drew",
 				"character": "fox",
 				"starting_stocks": 4,
-				"remaining_stocks": 4,
-				"win": true
+				"remaining_stocks": 0,
+				"win": false
 			};
-			var generatedParticipantData = smashconnector.formatParticipantData("drew", "fox", 4, 4, true);
+			var generatedParticipantData = smashconnector.formatParticipantData("drew", "fox", 4, 0, false);
 
 			chai.expect(generatedParticipantData).to.deep.equal(expectedParticipantData, 'stage data was not formatted as expected');
 		});
