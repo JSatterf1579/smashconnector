@@ -37,7 +37,7 @@ smashconnector.listPlayers("mongodb://example.mongo.url:27017/example", {} (err,
 	
 	if(!playerMatch.match) { // If the name wasn't found
 		if(playerMatch.suggestions) { // If it gave us back suggestions
-			player1name = suggestions.[0]; // Let's very presumptively just use the first suggestion as the name
+			player1name = playerMatch.suggestions[0]; // Let's very presumptively just use the first suggestion as the name
 		} else {
 			throw new Error("I don't know this name!");
 		}
@@ -159,8 +159,6 @@ function insertGames(url, games, callback(err, result)) {
 
 function insertPlayers(url, players, callback(err, result)) {
 
-function insertPlayers(url, players, callback(err, result)) {
-
 function insertStages(url, stages, callback(err, result)) {
 
 function insertCharacters(url, characters, callback(err, result)) {
@@ -182,8 +180,6 @@ Just like with insert, there are functions to query from each of the collections
 
 ```javascript
 function listGames(url, query, callback(err, docs)) {
-
-function listPlayers(url, query, callback(err, docs)) {
 
 function listPlayers(url, query, callback(err, docs)) {
 
