@@ -37,14 +37,14 @@ smashconnector.listPlayers("mongodb://example.mongo.url:27017/example", {} (err,
 	
 	if(!playerMatch.match) { // If the name wasn't found
 		if(playerMatch.suggestions) { // If it gave us back suggestions
-			player1name = suggestions.[0]; // Let's very presumptively just use the first suggestion as the name
+			player1name = playerMatch.suggestions[0]; // Let's very presumptively just use the first suggestion as the name
 		} else {
 			throw new Error("I don't know this name!");
 		}
 	}
 
 	// Now that we have the name, let's format the participant data
-	var participantData = formatParticipantData(player1name, "captain_falcon", 4, 2, true);
+	var participantData = smashconnector.formatParticipantData(player1name, "captain_falcon", 4, 2, true);
 
 	// .. more formatting to create game record
 	// var games = a list of games in this match
@@ -159,8 +159,6 @@ function insertGames(url, games, callback(err, result)) {
 
 function insertPlayers(url, players, callback(err, result)) {
 
-function insertPlayers(url, players, callback(err, result)) {
-
 function insertStages(url, stages, callback(err, result)) {
 
 function insertCharacters(url, characters, callback(err, result)) {
@@ -171,14 +169,17 @@ function insertGameTypes(url, gameTypes, callback(err, result)) {
 ## Query
 <a name="query"></a>
 
-Querying data from the archive is easy and is done using <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">mongo query documents</a>. 
+Querying data from the archive is easy and is done using <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">mongo query documents</a>.
+
+For example, here's a query document that finds all the games that **I** won, of which there should be many:
+```json
+{ "participants": { "$elemMatch": { "name": "drew", "win": true } } }
+```
 
 Just like with insert, there are functions to query from each of the collections mentioned above. Each of these calls back with a list of json documents. As with insert, the error callback object will be populate if there is an error during the operation.
 
 ```javascript
 function listGames(url, query, callback(err, docs)) {
-
-function listPlayers(url, query, callback(err, docs)) {
 
 function listPlayers(url, query, callback(err, docs)) {
 
