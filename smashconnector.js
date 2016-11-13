@@ -34,7 +34,7 @@ function listStages(url, query, callback) {
 }
 
 function getStageById(url, id, callback) {
-	mongoGetById(url, gameCollection, id, callback);
+	mongoGetById(url, stageCollection, id, callback);
 }
 
 function insertGameTypes(url, gameTypes, callback) {
@@ -46,7 +46,7 @@ function listGameTypes(url, query, callback) {
 }
 
 function getGameTypeById(url, id, callback) {
-	mongoGetById(url, gameCollection, id, callback);
+	mongoGetById(url, gameTypeCollection, id, callback);
 }
 
 function insertPlayers(url, players, callback) {
@@ -58,7 +58,7 @@ function listPlayers(url, query, callback) {
 }
 
 function getPlayerById(url, id, callback) {
-	mongoGetById(url, gameCollection, id, callback);
+	mongoGetById(url, playerCollection, id, callback);
 }
 
 function insertCharacters(url, characters, callback) {
@@ -70,7 +70,7 @@ function listCharacters(url, query, callback) {
 }
 
 function getCharacterById(url, id, callback) {
-	mongoGetById(url, gameCollection, id, callback);
+	mongoGetById(url, characterCollection, id, callback);
 }
 
 function mongoList(url, collectionName, query, callback) {
