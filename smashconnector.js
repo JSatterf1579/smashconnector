@@ -1,4 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
 var levenshtein = require('fast-levenshtein');
 
 //Mongo connection section
@@ -10,11 +11,18 @@ const gameTypeCollection = "gameTypes";
 const gameCollection = "games";
 
 function insertGames(url, games, callback) {
+	for(var i in games) { // Timestamp games for input
+		games[i].date = new Date();
+	}
 	mongoInsert(url, gameCollection, games, callback);
 }
 
 function listGames(url, query, callback) {
 	mongoList(url, gameCollection, query, callback);
+}
+
+function getGameById(url, id, callback) {
+	mongoGetById(url, gameCollection, id, callback);
 }
 
 function insertStages(url, stages, callback) {
@@ -25,12 +33,20 @@ function listStages(url, query, callback) {
 	mongoList(url, stageCollection, query, callback);
 }
 
+function getStageById(url, id, callback) {
+	mongoGetById(url, gameCollection, id, callback);
+}
+
 function insertGameTypes(url, gameTypes, callback) {
 	mongoInsert(url, gameTypeCollection, gameTypes, callback);
 }
 
 function listGameTypes(url, query, callback) {
 	mongoList(url, gameTypeCollection, query, callback);
+}
+
+function getGameTypeById(url, id, callback) {
+	mongoGetById(url, gameCollection, id, callback);
 }
 
 function insertPlayers(url, players, callback) {
@@ -41,6 +57,10 @@ function listPlayers(url, query, callback) {
 	mongoList(url, playerCollection, query, callback);
 }
 
+function getPlayerById(url, id, callback) {
+	mongoGetById(url, gameCollection, id, callback);
+}
+
 function insertCharacters(url, characters, callback) {
 	mongoInsert(url, characterCollection, characters, callback);
 }
@@ -49,12 +69,26 @@ function listCharacters(url, query, callback) {
 	mongoList(url, characterCollection, query, callback);
 }
 
+function getCharacterById(url, id, callback) {
+	mongoGetById(url, gameCollection, id, callback);
+}
+
 function mongoList(url, collectionName, query, callback) {
 	MongoClient.connect(url, (err, db) => {
 		var collection = db.collection(collectionName);
 		collection.find(query).toArray((err, docs) => {
 			db.close();
 			callback(err, docs);
+		});
+	});
+}
+
+function mongoGetById(url, collectionName, id, callback) {
+	MongoClient.connect(url, (err, db) => {
+		var collection = db.collection(collectionName);
+		collection.findOne({"_id": new ObjectId(id)}, (err, doc) => {
+			db.close();
+			callback(err, doc);
 		});
 	});
 }
@@ -189,13 +223,18 @@ function isInputEmpty(inputList) {
 module.exports = {
 	insertGames: insertGames,
 	listGames: listGames,
+	getGameById: getGameById,
 	insertStages: insertStages,
 	listStages: listStages,
+	getStageById: getStageById,
 	insertGameTypes: insertGameTypes,
 	listGameTypes: listGameTypes,
+	getGameTypeId: getGameTypeById,
 	listPlayers: listPlayers,
+	getPlayerById: getPlayerById,
 	insertPlayers: insertPlayers,
 	listCharacters: listCharacters,
+	getCharacterById: getCharacterById,
 	insertCharacters: insertCharacters,
 	match: match,
 	isNameInList: isNameInList,
